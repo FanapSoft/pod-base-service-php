@@ -13,7 +13,8 @@
     "description": "pod sdk common classes and methods",
     "require": {
         "php": ">=5.5",
-    "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "justinrainbow/json-schema": "^5.2"
     },
 
     "autoload": {
