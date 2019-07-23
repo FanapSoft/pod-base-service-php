@@ -1,0 +1,25 @@
+{
+    "name": "pod-sdk/pod-base-service",
+    "version": "1.0.0",
+    "type": "library",
+    "keywords": ["sdk", "pod sdk", "pod sdk base service"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fanap Soft SDK Develop Team",
+            "email": "podsdk@fanap.ir"
+        }
+    ],
+    "description": "pod sdk common classes and methods",
+    "require": {
+        "php": ">=5.5",
+    "guzzlehttp/guzzle": "^6.3"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Pod\\Base\\Service\\" : "models/"
+        }
+    }
+
+}
