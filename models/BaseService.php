@@ -12,7 +12,7 @@ use JsonSchema\Validator;
 class BaseService
 {
     // Error Codes
-    const VALIDATION_ERROR_CODE = 888;
+    const VALIDATION_ERROR_CODE = 887;
     const VALIDATION_ERROR_MESSAGE = "";
     const SDK_ERROR_CODE = 999;
     const SERVER_ERROR_CODE = 500;
@@ -92,18 +92,6 @@ class BaseService
             return strlen($value);
         }
     }
-
-//    public static function prepareData($value) {
-//        if (is_string($value)){
-//            return trim($value);
-//        }
-//        else if (is_bool($value)){
-//            return $value ? "true" : "false";
-//        }
-//        else {
-//            return $value;
-//        }
-//    }
 
     public static function prepareData(&$value, $key) {
 //        if (is_string($value) && !isset(self::$noTrimFields[$key])){
