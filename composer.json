@@ -10,16 +10,17 @@
             "email": "podsdk@fanap.ir"
         }
     ],
-    "description": "pod sdk common classes and methods",
+    "description": "pod sdk base service",
     "require": {
         "php": ">=5.5",
         "guzzlehttp/guzzle": "^6.3",
-        "justinrainbow/json-schema": "^5.2"
+        "justinrainbow/json-schema": "^5.2",
+        "ext-json": "*"
     },
 
     "autoload": {
         "psr-4": {
-            "Pod\\Base\\Service\\" : "models/"
+            "Pod\\Base\\Service\\" : "src/"
         }
     }
 
