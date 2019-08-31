@@ -13,6 +13,7 @@ use Pod\Base\Service\Exception\ValidationException;
 class BaseService
 {
     protected static $serverType;
+    protected static $config;
     protected static $jsonSchema;
     private static $validator;
 
@@ -25,6 +26,7 @@ class BaseService
     ];
 
     public function __construct() {
+        self::$config = require __DIR__ . '/../config/baseUri.php';
         self::$serverType = self::getServerType();
         self::$validator = new Validator();
     }
