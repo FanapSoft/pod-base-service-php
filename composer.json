@@ -1,12 +1,12 @@
 {
     "name": "pod-sdk/pod-base-service",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "keywords": ["sdk", "pod sdk", "pod sdk base service"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Fanap Soft SDK Develop Team",
+            "name": "Elham Keshtgar",
             "email": "podsdk@fanap.ir"
         }
     ],
@@ -23,5 +23,4 @@
             "Pod\\Base\\Service\\" : "src/"
         }
     }
-
 }

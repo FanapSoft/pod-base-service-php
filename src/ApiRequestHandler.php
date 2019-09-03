@@ -60,7 +60,13 @@ Class ApiRequestHandler{
 
         if (!$restFull) {
             if (isset($result['hasError']) && $result['hasError']) {
-                throw new PodException($result['message'], $result['errorCode'],null, $result);
+                if (!isset($result['message']) && isset($result['errorDescription'])) {
+                    $result['message'] = $result['errorDescription'];
+                    unset($result['errorDescription']);
+                }
+                $message = isset($result['message']) ? $result['message'] :"Some unhandled error has occurred!";
+                $errorCode = isset($result['errorCode']) ? $result['errorCode'] : PodException::SERVER_UNHANDLED_ERROR_CODE;
+                throw new PodException($message, $errorCode,null, $result);
             }
         }
 

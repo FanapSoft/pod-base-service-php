@@ -18,11 +18,12 @@ class BaseService
     private static $validator;
 
     private static $noTrimFields = [
-        'client_metadata' => true,
+        'query' => true,
         'metaData' => true,
         'metadata' => true,
         'metaQuery' => true,
-        'query' => true,
+        'filterValue' => true,
+        'client_metadata' => true,
     ];
 
     public function __construct() {
@@ -66,7 +67,6 @@ class BaseService
             } else {
                 throw new ValidationException([], "$paramKey key in option should be set!", $code);
             }
-
         }
         elseif(isset($option[$paramKey])) {
             throw new ValidationException([], "$paramKey key in option is not allowed to send!", $code);
@@ -74,7 +74,7 @@ class BaseService
 
         // json parameter validation
         if (isset(self::$jsonSchema[$apiName]['json'])) {
-            if (isset($option[$paramKey])) {
+            if (isset($option['json'])) {
                 $jsonParams = isset($option['json']) ? (object)($option['json']) : [];
                 $jsonParamSchema = json_decode(json_encode(self::$jsonSchema[$apiName]['json']));
                 self::$validator->validate($jsonParams, $jsonParamSchema);

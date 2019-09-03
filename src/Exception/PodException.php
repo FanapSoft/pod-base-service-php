@@ -8,6 +8,7 @@ class PodException extends \Exception
 
     // Error Codes
     const SDK_UNEXPECTED_ERROR_CODE = 888;
+    const SERVER_UNHANDLED_ERROR_CODE = 999;
     const SERVER_ERROR_CODE = 500;
     const VALIDATION_ERROR_MESSAGE = '';
     private $_result;
