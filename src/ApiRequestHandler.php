@@ -29,9 +29,14 @@ Class ApiRequestHandler{
         ]);
 
         if ($optionHasArray && $method == 'GET') {
-            $httpQuery = self::buildHttpQuery($option['query']);
+
+            $withoutBracketParams = isset($option['withoutBracketParams']) ? $option['withoutBracketParams'] : [];
+            $withBracketParams = isset($option['withBracketParams']) ? $option['withBracketParams'] : [];
+
+            $httpQuery = self::buildHttpQuery($withoutBracketParams, $withBracketParams);
             $relativeUri = $relativeUri . '?' . $httpQuery;
-            unset($option['query']); // unset query because it is added to uri and dont need send again in query params
+            unset($option['withoutBracketParams']); // unset query because it is added to uri and dont need send again in query params
+            unset($option['withBracketParams']); // unset query because it is added to uri and dont need send again in query params
         }
 
         try {
@@ -73,10 +78,23 @@ Class ApiRequestHandler{
         return $result;
     }
 
-    // build http query for array parameters
-    public static function buildHttpQuery($params){
-        $query = http_build_query($params ,null, '&');
-        $httpQuery = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '[]=', $query);
-        return $httpQuery;
+    // build http query for array and list parameters
+    public static function buildHttpQuery($withoutBracketParams, $withBracketParams){
+
+        $queryWithoutBracket = '';
+        if (!empty($withoutBracketParams) ) {
+            $queryWithoutBracket = http_build_query($withoutBracketParams ,null, '&');
+            $queryWithoutBracket = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $queryWithoutBracket);
+
+        }
+
+        $queryWithBracket = '';
+        if (!empty($withBracketParams) ) {
+            $queryWithBracket = http_build_query($withBracketParams, null, '&');
+            $queryWithBracket = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '[]=', $queryWithBracket);
+            $queryWithoutBracket = !empty($queryWithoutBracket) ? $queryWithoutBracket .'&' : '';
+        }
+
+        return $queryWithoutBracket . $queryWithBracket;
     }
 }

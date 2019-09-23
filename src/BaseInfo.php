@@ -13,16 +13,11 @@ class BaseInfo
     const PRODUCTION_SERVER = 'Production';
     const SANDBOX_SERVER = 'Sandbox';
     public static $serverType;
-    public  $_token_;
-    public  $_token_issuer_ = 1;
-
+    private  $token;
+    private  $tokenIssuer = 1;
 
     public function setToken($token) {
-        $this->_token_ = $token;
-    }
-
-    public function setTokenIssuer($tokenIssuer) {
-        $this->_token_issuer_ = $tokenIssuer;
+        $this->token = $token;
     }
 
     /**
@@ -30,12 +25,16 @@ class BaseInfo
      * @throws InvalidConfigException
      */
     public function getToken() {
-        if ($this->_token_) {
-            return $this->_token_;
+        if ($this->token) {
+            return $this->token;
         }
         else {
-            throw new InvalidConfigException('_token_  is not set! Please set it and try again.', InvalidConfigException::INVALID_CONFIG_PARAMETER);
+            throw new InvalidConfigException('token  is not set! Please set it and try again.', InvalidConfigException::INVALID_CONFIG_PARAMETER);
         }
+    }
+
+    public function setTokenIssuer($tokenIssuer) {
+        $this->$tokenIssuer = $tokenIssuer;
     }
 
     /**
@@ -43,8 +42,8 @@ class BaseInfo
      * @throws InvalidConfigException
      */
     public function getTokenIssuer() {
-        if ($this->_token_issuer_) {
-            return $this->_token_issuer_;
+        if (isset($this->tokenIssuer)) {
+            return $this->tokenIssuer;
         }
         else {
             throw new InvalidConfigException('_token_issuer_ is not set! Please set it and try again.', InvalidConfigException::INVALID_CONFIG_PARAMETER);
