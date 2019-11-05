@@ -28,8 +28,7 @@ class BaseService
 
     public function __construct() {
         self::$config = require __DIR__ . '/../config/baseUri.php';
-//        self::$serverType = self::getServerType();
-        self::$serverType = BaseInfo::PRODUCTION_SERVER;
+        self::$serverType = self::getServerType();
         self::$validator = new Validator();
     }
 
