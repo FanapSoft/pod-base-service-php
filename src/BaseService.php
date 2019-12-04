@@ -14,7 +14,6 @@ class BaseService
 {
     protected static $serverType;
     protected static $config;
-    protected static $jsonSchema;
     private static $validator;
 
     private static $noTrimFields = [
@@ -35,20 +34,20 @@ class BaseService
     /**
      * validate options
      *
-     * @param string $apiName
      * @param array $option
+     * @param array $jsonSchema
      * @param string $paramKey
      **
      * @throws ValidationException
      */
-    public static function validateOption($apiName, $option, $paramKey = 'query') {
+    public static function validateOption($option, $jsonSchema, $paramKey = 'query') {
         $code = ValidationException::VALIDATION_ERROR_CODE;
 
         // header validation
-        if (isset(self::$jsonSchema[$apiName]['header'])) {
+        if (isset($jsonSchema['header'])) {
             if(isset($option['headers'])) {
                 $header = (object)$option['headers'];
-                $headerSchema = json_decode( json_encode(self::$jsonSchema[$apiName]['header']) );
+                $headerSchema = json_decode( json_encode($jsonSchema['header']) );
                 self::$validator->validate($header, $headerSchema);
             } else {
                 throw new ValidationException([], '"Headers" key in option should be set!', $code);
@@ -59,10 +58,10 @@ class BaseService
         }
 
         // parameter validation
-        if (isset(self::$jsonSchema[$apiName][$paramKey])) {
+        if (isset($jsonSchema[$paramKey])) {
             if (isset($option[$paramKey])){
                 $params = (object)($option[$paramKey]);
-                $paramSchema = json_decode( json_encode(self::$jsonSchema[$apiName][$paramKey]) );
+                $paramSchema = json_decode( json_encode($jsonSchema[$paramKey]) );
                 self::$validator->validate($params, $paramSchema);
             } else {
                 throw new ValidationException([], "$paramKey key in option should be set!", $code);
@@ -73,10 +72,10 @@ class BaseService
         }
 
         // json parameter validation
-        if (isset(self::$jsonSchema[$apiName]['json'])) {
+        if (isset($jsonSchema['json'])) {
             if (isset($option['json'])) {
                 $jsonParams = isset($option['json']) ? (object)($option['json']) : [];
-                $jsonParamSchema = json_decode(json_encode(self::$jsonSchema[$apiName]['json']));
+                $jsonParamSchema = json_decode(json_encode($jsonSchema['json']));
                 self::$validator->validate($jsonParams, $jsonParamSchema);
             } else
                 {
