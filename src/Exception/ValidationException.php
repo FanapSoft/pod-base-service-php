@@ -43,10 +43,19 @@ class ValidationException extends PodException
         foreach ($this->validation_errors as $property => $property_errors) {
             $property_errors = is_array($property_errors) ? $property_errors : [$property_errors];
 
-            $errors[] = implode(', ', $property_errors);
+            $errors[$property] = implode('; ', $property_errors);
         }
-
-        return implode(', ', $errors);
+        return implode(PHP_EOL, array_map(
+            function ($v, $k) {
+                if(is_array($v)){
+                    return $k.'[] => '.implode('&'.$k.'[] => ', $v);
+                }else{
+                    return $k.' => '.$v;
+                }
+            },
+            $errors,
+            array_keys($errors)
+        ));
     }
 
 }

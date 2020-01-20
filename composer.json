@@ -1,6 +1,6 @@
 {
     "name": "pod-sdk/pod-base-service",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "type": "library",
     "keywords": ["sdk", "pod sdk", "pod sdk base service"],
     "license": "MIT",
