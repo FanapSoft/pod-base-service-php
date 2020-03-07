@@ -48,8 +48,9 @@ Class ApiRequestHandler{
                 $response = $e->getResponse();
 
                 $code = $response->getStatusCode();
-                $message = $response->getBody()->getContents();
-                throw new RequestException($message, $code);
+                $responseBody = json_decode($response->getBody()->getContents(), true);
+                $message = isset($responseBody['message']) ? $responseBody['message'] : $e->getMessage();
+                throw new RequestException($message, $code, null, $responseBody);
             }
 
             $code = RequestException::SERVER_CONNECTION_ERROR;

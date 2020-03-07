@@ -11,5 +11,6 @@ return [
         'PLATFORM-ADDRESS'              =>  'https://api.pod.ir/srv/core/',
         'PRIVATE-CALL-ADDRESS'          =>  'https://pay.pod.ir/',
         'FILE-SERVER-ADDRESS'           =>  'https://core.pod.ir/',
+        'SAKKU-API-ADDRESS'             =>  'https://api.sakku.cloud/',
     ]
 ];
