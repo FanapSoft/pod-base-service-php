@@ -1,6 +1,6 @@
 {
     "name": "pod-sdk/pod-base-service",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "type": "library",
     "keywords": ["sdk", "pod sdk", "pod sdk base service"],
     "license": "MIT",
@@ -13,7 +13,7 @@
     "description": "pod sdk base service",
     "require": {
         "php": ">=5.5",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": ">=6.3",
         "justinrainbow/json-schema": "^5.2",
         "ext-json": "*"
     },
